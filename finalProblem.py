@@ -20,7 +20,6 @@ def fv(v):
     v2 = float(v[1])
     f = 2.0 + v1 / 40.0 + v2 / 30.0 + np.cos((v1 * v2) / 20.0)
 
-    # Required print format (matches the assignment style)
     print(f" f([ {v1:7.4f} , {v2:7.4f} ]) = {f:7.4f} ")
     return f
 
