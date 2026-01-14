@@ -12,12 +12,8 @@ def fourier_square_partial(x: np.ndarray, n: int) -> np.ndarray:
     without using an explicit sum() or inner for-loop.
     """
     k = np.arange(1, n + 1)                 # k = [1, 2, ..., n]
-    m = 2 * k - 1                           # odd harmonics: 1, 3, 5, ...
-    a = 1 / m                               # coefficients 1/(2k-1)
-
-    # Make a column vector of coefficients (n x 1) and a row vector of x (1 x len(x))
-    # sin(m^T * x) becomes an (n x len(x)) matrix of all sinusoids
-    # Then (a^T) @ sin_matrix gives (1 x len(x)) which we flatten back to (len(x),)
+    m = 2 * k - 1                           # odd harmonics
+    a = 1 / m                               # coefficients 
     y = (4 / np.pi) * (a.reshape(1, -1) @ np.sin(m.reshape(-1, 1) * x.reshape(1, -1))).ravel()
     return y
 
@@ -27,7 +23,6 @@ def main():
 
     plt.figure(figsize=(9, 5))
 
-    # single for-loop over the requested n values
     for n in (5, 10, 15):
         y = fourier_square_partial(x, n)
         plt.plot(x, y, label=f"n = {n}")
